@@ -12,7 +12,6 @@ sys.path.insert(0, project_root)
 
 from sabik_agent.agent import AdvancedSabikAgent
 from sabik_agent.interface import console, Panel
-from sabik_agent.monitor import FeedMonitor
 from sabik_agent import config as app_config # For OUTPUT_DIR or other direct config needs
 
 def run_cli():
@@ -21,10 +20,6 @@ def run_cli():
 
     agent = AdvancedSabikAgent()
     
-    # Initialize the FeedMonitor with the agent's session and config
-    # The agent's session has the necessary headers (Referrer, User-Agent)
-    monitor_service = FeedMonitor(session=agent.get_session(), config_module=app_config)
-
     console.print(Panel(f"""[bold]Sabik AI Agent[/]
 Referrer: [cyan]{agent.referrer}[/cyan]
 LLM API: [cyan]{app_config.OPENAI_BASE_URL_TEXT}[/cyan]
@@ -43,11 +38,6 @@ Responses are not streamed in this version for simplicity with tool integration.
     - "Can you say 'Hello, world!' using the 'echo' voice?"
     - "What is the result of (350 / 7) * 3 + 15?"
     - "Fetch the main content from the webpage https://example.com"
-  - Monitor commands:
-    - [cyan]monitor image start[/cyan] : Start the image feed monitor.
-    - [cyan]monitor image stop[/cyan]  : Stop all active monitors.
-    - [cyan]monitor text start[/cyan]  : Start the text (LLM) feed monitor.
-    - [cyan]monitor text stop[/cyan]   : Stop all active monitors.
   - To exit:
     - [cyan]quit[/cyan] or [cyan]exit[/cyan]
 """, title="Help & Instructions", border_style="blue", expand=False))
@@ -68,18 +58,6 @@ Responses are not streamed in this version for simplicity with tool integration.
             if command in ["quit", "exit"]:
                 console.print("[yellow]Exiting Sabik AI...[/yellow]")
                 break
-            elif command == "monitor image start":
-                monitor_service.start_image_feed_monitor()
-                continue
-            elif command == "monitor image stop": # General stop for all monitors
-                monitor_service.stop_all_monitors()
-                continue
-            elif command == "monitor text start":
-                monitor_service.start_text_feed_monitor()
-                continue
-            elif command == "monitor text stop": # General stop for all monitors
-                monitor_service.stop_all_monitors()
-                continue
             
             if not command: # Empty input
                 continue
@@ -95,8 +73,6 @@ Responses are not streamed in this version for simplicity with tool integration.
             console.rule(style="dim grey50") # Separator after processing each command
 
     finally:
-        console.print("[bold yellow]Shutting down Sabik AI. Stopping monitors...[/bold yellow]")
-        monitor_service.stop_all_monitors()
         console.print("[bold green]Sabik AI shut down gracefully.[/bold green]")
 
 if __name__ == "__main__":

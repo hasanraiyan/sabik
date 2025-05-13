@@ -45,7 +45,6 @@ class AdvancedSabikAgent:
             "calculator": agent_tools.calculator,
         }
         self.message_history = []
-        # Monitoring related attributes (feed_threads, stop_event) are now in the FeedMonitor class
 
     def _chat_completion_with_tools(self, messages_to_send, model="openai-large"):
         current_messages_for_api_call = list(messages_to_send) # Work with a copy
@@ -237,5 +236,5 @@ class AdvancedSabikAgent:
             return "[Agent Info: Failed to get a response from the assistant after processing.]"
 
     def get_session(self):
-        """Allows external components (like FeedMonitor) to access the agent's session."""
+        """Allows external components to access the agent's session."""
         return self.session
