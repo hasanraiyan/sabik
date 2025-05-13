@@ -49,6 +49,20 @@ Sabik is the opposite:
 
 ---
 
+## ⚙️ Environment Variables Configuration
+
+Sabik can be configured using the following environment variables:
+
+| Environment Variable | Description | Default Value |
+|---------------------|-------------|---------------|
+| `OPENAI_BASE_URL_TEXT` | Base URL for text API requests | 
+| `OPENAI_IMAGE_BASE_URL_TEXT` | Base URL for image API requests | 
+| `OPENAI_REFERRER` | Referrer ID for API requests |
+| `OPENAI_API_KEY` | API key for authentication |
+| `OUTPUT_DIR` | Directory for saving generated outputs |
+
+---
+
 ## 🛠️ Setup
 
 > ⚠️ Code coming soon. First commit will contain basic CLI skeleton.

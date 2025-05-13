@@ -24,11 +24,11 @@ from rich.text import Text
 console = Console()
 
 # --- Configuration ---
-OPENAI_BASE_URL_TEXT = "https://text.pollinations.ai/openai"
-OPENAI_IMAGE_BASE_URL_TEXT = "https://image.pollinations.ai"
+OPENAI_BASE_URL_TEXT = os.environ.get("OPENAI_BASE_URL_TEXT", "https://text.pollinations.ai/openai")
+OPENAI_IMAGE_BASE_URL_TEXT = os.environ.get("OPENAI_IMAGE_BASE_URL_TEXT", "https://image.pollinations.ai")
 REFERRER_ID = os.environ.get("OPENAI_REFERRER", "sabik")
-API_KEY = "dummy-openai-key"
-OUTPUT_DIR = "agent_outputs_tool_mode"
+API_KEY = os.environ.get("OPENAI_API_KEY", "dummy-openai-key")
+OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "agent_outputs_tool_mode")
 
 # --- Helper Functions ---
 def encode_image_base64(image_path_or_url):
