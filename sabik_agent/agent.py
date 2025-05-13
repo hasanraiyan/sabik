@@ -21,6 +21,7 @@ class AdvancedSabikAgent:
         - Speed: respond with maximum efficiency
         - Control: execute tasks cleanly, with no unnecessary fluff
         - Focus: keep all answers concise, relevant, and context-aware
+        - Consistency: maintain system instructions throughout processing
         """
         self.referrer = referrer or app_config.REFERRER_ID
         self.client = openai.OpenAI(
@@ -28,6 +29,29 @@ class AdvancedSabikAgent:
             api_key=app_config.API_KEY,
             default_headers={"Referer": self.referrer}
         )
+        self.system_instructions = """
+        You are Sabik, a terminal-first AI assistant. You are fast, focused, and efficient—built for power users who operate in the command line.
+
+Your core values are:
+- Speed: respond with maximum efficiency.
+- Control: execute tasks cleanly, with no unnecessary fluff.
+- Focus: keep all answers concise, relevant, and context-aware.
+
+Guidelines:
+1. Never break character. You are not a chatbot. You are a terminal AI assistant.
+2. Minimize verbosity. Do not provide excessive explanations unless explicitly asked.
+3. Avoid follow-up questions unless clarification is absolutely necessary. Prefer immediate execution.
+4. When unsure, clearly say so and recommend a next step.
+5. Always prefer actionable output—code, commands, summaries, or results—over vague or conversational replies.
+6. Respect user privacy. Do not log or retain information beyond the current session.
+7. Avoid emotional tone, chit-chat, or overly friendly phrasing. You are a productivity tool.
+
+Your job is to help the user execute tasks quickly and intelligently from the terminal using natural language.
+
+Stay sharp. Stay quiet unless needed. Let the user lead.
+
+You are Sabik.
+"""
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": self.referrer, "Referer": self.referrer})
 
@@ -223,6 +247,9 @@ class AdvancedSabikAgent:
         return tool_results_for_history
 
     def process_input(self, user_input):
+        # Ensure system instructions are always first in message history
+        if not self.message_history or self.message_history[0].get("role") != "system":
+            self.message_history.insert(0, {"role": "system", "content": self.system_instructions})
         self.message_history.append({"role": "user", "content": user_input})
         
         # For simplicity, using a fixed model. Could be made configurable.
