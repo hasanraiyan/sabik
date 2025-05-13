@@ -1,94 +1,122 @@
-# Sabik - The Terminal Assistant 🧠💻
+# Sabik - Terminal AI Assistant 🧠💻
 
-> **"Speed. Control. Focus."**  
-> Sabik is your personal assistant designed to live in your terminal — built for makers who hate wasting time.
-
----
-
-## 🚧 Status: Project Kickoff (May 2025)
-
-This is the initial scaffold for **Sabik**, a blazing-fast, keyboard-first terminal assistant.
-
-**Goal**: Create an intelligent, extensible assistant that helps you automate routine tasks, fetch useful information, and control your digital life — all from the command line.
+**Speed. Control. Focus.**  
+Sabik is your personal CLI assistant built for fast, privacy-respecting, AI-powered productivity.
 
 ---
 
-## 🧠 Why Sabik?
+## ✨ What is Sabik?
 
-Most assistants are:
-- 🐌 Too slow
-- 📱 GUI-heavy and distracting
-- 🧩 Not developer-friendly
-- 🔐 Data-invasive
-
-Sabik is the opposite:
-- ⚡ Terminal-first (CLI-only)
-- 🧘 Minimal, fast, and distraction-free
-- 🧱 Modular: You control what it can do
-- 🔒 Local-first, privacy-respecting
+Sabik is a terminal-first AI agent that helps you automate information tasks, generate content (text, images), analyze data, and interact with your filesystem—all with natural language in your terminal.
 
 ---
 
-## 🎯 Planned Features (MVP)
+## 🚀 Features
 
-- ✅ Command parsing engine (natural language + aliases)
-- ✅ Task manager (`add`, `done`, `list`, etc.)
-- ✅ File launcher (`open`, `search`, `recent`)
-- ✅ Web assistant (`weather`, `wiki`, `news`, etc.)
-- ✅ Reminders / Timers
-- ✅ Plugin system for extensibility
-
----
-
-## 🔍 Tech Stack (Planned)
-
-- **Language**: Python 3.x
-- **CLI Framework**: `argparse` / `click`
-- **Natural Language Parsing**: Custom rules + optional OpenAI integration
-- **Plugin System**: Basic dynamic module loader
+- **Natural language command processing** using OpenAI LLMs (calls OpenAI-compatible APIs).
+- **Tool-calling support**: The agent can automatically use:
+  - Text-to-image generation (`generate_ai_image`)
+  - Image content analysis (`analyze_image_content`)
+  - Audio file transcription (`transcribe_audio_file`)
+  - Text-to-speech audio generation (`generate_speech_audio`)
+  - Simple web search (`simple_web_search`)
+  - Calculator (`calculator`)
+- **Rich CLI interface:** Fast, keyboard-driven, with minimal distractions.
 
 ---
 
-## ⚙️ Environment Variables Configuration
+## ⚙️ Installation & Setup
 
-Sabik can be configured using the following environment variables:
+1. **Clone the repository:**
 
-| Environment Variable | Description | Default Value |
-|---------------------|-------------|---------------|
-| `OPENAI_BASE_URL_TEXT` | Base URL for text API requests | 
-| `OPENAI_IMAGE_BASE_URL_TEXT` | Base URL for image API requests | 
-| `OPENAI_REFERRER` | Referrer ID for API requests |
-| `OPENAI_API_KEY` | API key for authentication |
-| `OUTPUT_DIR` | Directory for saving generated outputs |
+   ```bash
+   git clone <your-sabik-repo-url>
+   cd sabik
+   ```
+
+2. **Set up environment variables:**  
+   Create a `.env` file (see `.env.example` for required variables):
+
+   ```
+   OPENAI_BASE_URL_TEXT=...
+   OPENAI_IMAGE_BASE_URL_TEXT=...
+   OPENAI_API_KEY=sk-...
+   OUTPUT_DIR=./outputs
+   ```
+
+3. **Install dependencies:**
+
+   ```bash
+   pip install -r requirements.txt
+   # (If requirements.txt is missing, install: openai, requests, rich)
+   ```
+
+4. **Run the assistant:**
+
+   ```bash
+   python main.py
+   ```
 
 ---
 
-## 🛠️ Setup
+## 📝 How to Use
 
-> ⚠️ Code coming soon. First commit will contain basic CLI skeleton.
+Once started, Sabik runs in your terminal and awaits your input.  
+**Just type your request**, for example:
 
-To get notified when the core is ready, **star** the repo and watch for the first release.
+- `Generate an image of a futuristic city at sunset.`
+- `What is depicted in the image located at ./cat.jpg?`
+- `Transcribe the audio content from meeting.wav.`
+- `Can you say "Hello, world!" using the echo voice?`
+- `What is the result of (350 / 7) * 3 + 15?`
+- `Fetch the main content from https://example.com.`
+
+**To exit:**  
+Type `quit` or `exit`.
 
 ---
 
-## 💡 Vision
+## 🔐 Configuration
 
-Sabik is not a toy. It's a power tool.  
-It should feel like an extension of your mind — fast, programmable, and always at your fingertips.
+Environment variables (see `.env.example`):
+
+| Variable                  | Purpose                                    |
+|---------------------------|--------------------------------------------|
+| OPENAI_BASE_URL_TEXT      | Text endpoints for OpenAI-compatible API   |
+| OPENAI_IMAGE_BASE_URL_TEXT| Image generation API endpoint              |
+| OPENAI_API_KEY            | Your OpenAI (or compatible) API key        |
+| OUTPUT_DIR                | Directory to store outputs                 |
+
+---
+
+## 🏗️ Project Structure
+
+```
+sabik/
+├── main.py                 # CLI entry point
+├── sabik_agent/            # Core logic (agent, tools, config, interface)
+├── .env.example            # Example environment config
+```
+
+---
+
+## 📦 Requirements
+
+- Python 3.8+
+- Packages: openai, requests, rich
 
 ---
 
 ## 👤 Author
 
 **Raiyan Hasan**  
-B.Tech @ MIT Muzaffarpur | Builder of [PYQDeck](https://pyqdeck.vercel.app)  
-📧 [rayanhasan2006@gmail.com](mailto:rayanhasan2006@gmail.com)
+MIT Muzaffarpur | [PYQDeck](https://pyqdeck.vercel.app)
 
 ---
 
 ## 📜 License
 
-MIT — open to all, abuse by none.
+MIT License
 
 ---
 
