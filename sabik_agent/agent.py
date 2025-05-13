@@ -16,6 +16,12 @@ from . import tools as agent_tools
 
 class AdvancedSabikAgent:
     def __init__(self, referrer=None):
+        """
+        Initialize Sabik AI assistant with core values:
+        - Speed: respond with maximum efficiency
+        - Control: execute tasks cleanly, with no unnecessary fluff
+        - Focus: keep all answers concise, relevant, and context-aware
+        """
         self.referrer = referrer or app_config.REFERRER_ID
         self.client = openai.OpenAI(
             base_url=app_config.OPENAI_BASE_URL_TEXT,
